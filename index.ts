@@ -45,6 +45,6 @@ Haxball.then((HBInit) => {
 });
 
 createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "application/json" });
+    res.writeHead(200, { "Content-Type": "text/plain" });
     res.end(url);
 }).listen(parseInt(process.env.PORT as string));
