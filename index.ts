@@ -21,6 +21,7 @@ Haxball.then((HBInit) => {
             lat: parseInt(process.env.ROOM_GEO_LAT as string),
             lon: parseInt(process.env.ROOM_GEO_LON as string),
         },
+        debug: true,
     });
 
     room.setDefaultStadium("Big");
