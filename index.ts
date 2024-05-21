@@ -28,8 +28,6 @@ Haxball.then((HBInit) => {
     room.setScoreLimit(5);
     room.setTimeLimit(0);
 
-    room.setRequireCaptcha(false);
-
     room.onRoomLink = (link) => {
         console.log(link);
 
