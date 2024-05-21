@@ -1,5 +1,6 @@
 import Haxball from "haxball.js";
 import { config } from "dotenv";
+import { createServer } from "node:http";
 
 config();
 
@@ -31,3 +32,12 @@ Haxball.then((HBInit) => {
             room.setPlayerAdmin(player.id, true);
     };
 });
+
+createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(
+        JSON.stringify({
+            data: "Hello World!",
+        }),
+    );
+}).listen(parseInt(process.env.PORT as string));
