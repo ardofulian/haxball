@@ -4,7 +4,7 @@ import { createServer } from "node:http";
 
 config();
 
-let url: string;
+let url = ":D";
 
 Haxball.then((HBInit) => {
     console.log("Haxball: init complete");
@@ -28,6 +28,8 @@ Haxball.then((HBInit) => {
     room.setScoreLimit(5);
     room.setTimeLimit(0);
 
+    room.setRequireCaptcha(false);
+
     room.onRoomLink = (link) => {
         console.log(link);
 
@@ -44,9 +46,5 @@ Haxball.then((HBInit) => {
 
 createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(
-        JSON.stringify({
-            data: url || "Hello World!",
-        }),
-    );
+    res.end(url);
 }).listen(parseInt(process.env.PORT as string));
