@@ -4,7 +4,11 @@ import { createServer } from "node:http";
 
 config();
 
+let url: string;
+
 Haxball.then((HBInit) => {
+    console.log("Haxball: init complete");
+
     const room = HBInit({
         roomName: process.env.ROOM_NAME as string,
         password: process.env.ROOM_PASSWORD,
@@ -25,19 +29,23 @@ Haxball.then((HBInit) => {
 
     room.onRoomLink = (link) => {
         console.log(link);
+
+        url = link;
     };
 
     room.onPlayerJoin = (player) => {
         if (room.getPlayerList().length === 1)
             room.setPlayerAdmin(player.id, true);
     };
+}).catch((e) => {
+    console.error("Haxball:", e);
 });
 
 createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(
         JSON.stringify({
-            data: "Hello World!",
+            data: url || "Hello World!",
         }),
     );
 }).listen(parseInt(process.env.PORT as string));
